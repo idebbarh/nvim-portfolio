@@ -24,7 +24,7 @@ function FilesExplorer() {
       <FolderItem name="contact" Icon={FolderIcon}>
         <FileItem name="contact.md" icon={markdownIcon} />
       </FolderItem>
-      <FileItem name="color.lua" icon={luaIcon} />
+      <FileItem name="colorscheme.lua" icon={luaIcon} />
     </div>
   );
 }

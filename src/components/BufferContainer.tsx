@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import BufferContent from "./BufferContent";
 function BufferContainer() {
   const [selectedLine, setSelectedLine] = useState<number | null>(null);
@@ -7,7 +7,8 @@ function BufferContainer() {
     setSelectedLine(line);
   };
 
-  const createLinesNumbers = (lines: number): JSX.Element[] => {
+  const lines = 40;
+  const createLinesNumbers = (): JSX.Element[] => {
     return new Array(lines).fill(0).map((_, index) => {
       return (
         <span
@@ -25,11 +26,14 @@ function BufferContainer() {
     });
   };
 
+  const numberLinesItems = useMemo<JSX.Element[]>(
+    () => createLinesNumbers(),
+    [lines, selectedLine]
+  );
+
   return (
     <div className="flex-[0.8] flex bg-tn-buffer-background-color p-4">
-      <div className="flex flex-col items-end w-12">
-        {createLinesNumbers(40)}
-      </div>
+      <div className="flex flex-col items-end w-12">{numberLinesItems}</div>
       <BufferContent />
     </div>
   );
