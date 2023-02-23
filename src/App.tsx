@@ -1,17 +1,10 @@
-import React from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useRoutes,
-} from "react-router-dom";
+import React, { useState } from "react";
+import { Routes, Route, Navigate, useRoutes } from "react-router-dom";
 import Neovim from "./screens/Neovim";
 import Terminal from "./screens/Terminal";
 
 function App(): JSX.Element {
-  const pathname = window.location.pathname;
-  const isNeovimOpen = false;
+  const [isNeovimOpen, setIsNeovimOpen] = useState<boolean>(false);
 
   const TerminalRedirecter = () =>
     useRoutes([
@@ -20,7 +13,10 @@ function App(): JSX.Element {
         element: <Navigate to="/terminal" replace={true} />,
       },
       { path: "/", element: <Navigate to="/terminal" replace={true} /> },
-      { path: "/terminal", element: <Terminal /> },
+      {
+        path: "/terminal",
+        element: <Terminal setIsNeovimOpen={setIsNeovimOpen} />,
+      },
     ]);
 
   if (!isNeovimOpen) {
