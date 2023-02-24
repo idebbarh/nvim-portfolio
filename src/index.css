@@ -7,7 +7,7 @@
   html {
     font-family: "Roboto", sans-serif;
   }
-  body {
-    overflow: hidden;
+  #bufferContainer > div::-webkit-scrollbar {
+    display: none;
   }
 }

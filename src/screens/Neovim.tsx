@@ -3,7 +3,7 @@ import BufferContainer from "../components/BufferContainer";
 
 function Neovim() {
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <FilesExplorer />
       <BufferContainer />
     </div>

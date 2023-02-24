@@ -8,7 +8,7 @@ const markdownIcon: string =
 
 function FilesExplorer() {
   return (
-    <div className="h-screen p-4 bg-tn-file-explorer-bg flex flex-col gap-2 flex-[0.2]">
+    <div className="h-full p-4 bg-tn-file-explorer-bg flex flex-col gap-2 flex-[0.2]">
       <FolderItem name="about me" Icon={FolderIcon}>
         <FileItem name="about-me.md" icon={markdownIcon} />
       </FolderItem>
