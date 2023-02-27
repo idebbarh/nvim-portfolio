@@ -12,6 +12,9 @@ module.exports = {
         "tn-file-explorer-items-hover-color": "#2f334d",
         "tn-buffer-background-color": "#222436",
         "tn-buffer-line-number-color": "#3b4261",
+        "tn-section-heading-color": "#7092da",
+        "tn-orange-color": "#ff966c",
+        "tn-main-text-color": "#c8d3f5",
         //terminal colors
         "terminal-bg": "#12161b",
         "terminal-text-color": "#c0c5ce",

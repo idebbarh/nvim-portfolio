@@ -1,4 +1,15 @@
-const projects = {
+export type Project = {
+  name: string;
+  description: string;
+  technologies: string[];
+  link: string;
+};
+
+export type Projects = {
+  [key: string]: Project;
+};
+
+const projects: Projects = {
   pathfindingVisualiser: {
     name: "Pathfinding Visualiser",
     description:
@@ -81,3 +92,5 @@ const projects = {
     link: "https://movea-app-ismail-debbarh.netlify.app",
   },
 };
+
+export default projects;
