@@ -3,7 +3,7 @@ import AboutMeSection from "./AboutMeSection";
 import MyProjectsSection from "./MyProjectsSection";
 function BufferContent() {
   return (
-    <div className="pl-4">
+    <div className="pl-4 w-full">
       <Routes>
         <Route path="/" element={<h1>Home</h1>} />
         <Route path="about-me.md" element={<AboutMeSection />} />

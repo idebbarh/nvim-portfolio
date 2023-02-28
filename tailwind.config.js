@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        "auto-fill": "repeat(auto-fill, minmax(250px, 1fr))",
+      },
       colors: {
         //tokyonight colors
         "tn-file-explorer-bg": "#1e2030",

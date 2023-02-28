@@ -1,13 +1,27 @@
+import { useState } from "react";
 import ListOfProjects from "./ListOfProjects";
 import NormalParagraph from "./NormalParagraph";
 import SectionHeading from "./SectionHeading";
+import ListOfThings from "./ListOfThings";
+
+type ProjectInfoType = {
+  title: string;
+  description: string;
+  techStack: string[];
+};
 
 function MyProjectsSection() {
+  const [selectedProject, setSelectedProject] =
+    useState<null | ProjectInfoType>(null);
+
   return (
     <div className="flex flex-col gap-4">
-      <SectionHeading title="My Projects" />
+      <SectionHeading title="My Projects" tags={1} />
       <NormalParagraph content="some projects I am the most proud of." />
-      <ListOfProjects />
+      <ListOfProjects setSelectedProject={setSelectedProject} />
+      <SectionHeading title={selectedProject?.title} tags={2} />
+      <NormalParagraph content={selectedProject?.description} />
+      <ListOfThings things={selectedProject?.techStack} />
     </div>
   );
 }
