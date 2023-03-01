@@ -4,3 +4,5 @@ const socialMediaLinks = {
   twitter: "https://twitter.com/ismailFrDev",
   linkedin: "https://www.linkedin.com/in/ismail-debbarh-89a1b7250/",
 };
+
+export default socialMediaLinks;

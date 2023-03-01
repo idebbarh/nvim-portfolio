@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import BufferContent from "./BufferContent";
-function BufferContainer() {
+function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
   const [selectedLine, setSelectedLine] = useState<number | null>(null);
   const { pathname } = useLocation();
+  const bufferContentRef = useRef<HTMLDivElement>(null);
 
   const selectLine = (line: number) => {
     setSelectedLine(line);
@@ -35,6 +36,10 @@ function BufferContainer() {
     [lines, selectedLine]
   );
 
+  if (!openBuffer) {
+    return null;
+  }
+
   return (
     <div
       id="bufferContainer"
@@ -42,7 +47,7 @@ function BufferContainer() {
     >
       <div className="h-full flex overflow-scroll">
         <div className="flex flex-col items-end w-12">{numberLinesItems}</div>
-        <BufferContent />
+        <BufferContent ref={bufferContentRef} />
       </div>
 
       <div className="h-16 w-full absolute left-1/2 bottom-0 translate-x-[-50%] px-2">

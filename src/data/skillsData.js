@@ -1,4 +1,4 @@
-const techStack = {
+const mySkillsData = {
   languages: ["Python", "JavaScript", "TypeScript", "MySQL", "CSS", "HTML"],
   frameworks: [
     "React",
@@ -10,3 +10,5 @@ const techStack = {
   ],
   tools: ["Git", "Jest", "Docker"],
 };
+
+export default mySkillsData;
