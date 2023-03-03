@@ -1,3 +1,4 @@
+import socialMediaLinks from "../data/socials";
 import NormalParagraph from "./NormalParagraph";
 
 type ListOfThingsProps = {
@@ -14,7 +15,14 @@ function ListOfThings({ things, isSocial }: ListOfThingsProps) {
           <span className="text-tn-orange-color">-</span>
           <NormalParagraph
             content={item}
-            index={isSocial === true ? index : undefined}
+            replaceString={
+              isSocial === true
+                ? {
+                    str: Object.entries(socialMediaLinks)[index][1],
+                    context: "socials",
+                  }
+                : undefined
+            }
           />
         </li>
       ))}

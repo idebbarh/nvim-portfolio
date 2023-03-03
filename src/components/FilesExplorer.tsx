@@ -22,9 +22,6 @@ function FilesExplorer({ openBuffer }: { openBuffer: boolean }) {
       <FolderItem name="my skills" Icon={FolderIcon}>
         <FileItem name="my-skills.md" icon={markdownIcon} />
       </FolderItem>
-      <FolderItem name="socials" Icon={FolderIcon}>
-        <FileItem name="socials.md" icon={markdownIcon} />
-      </FolderItem>
       <FolderItem name="contact" Icon={FolderIcon}>
         <FileItem name="contact.md" icon={markdownIcon} />
       </FolderItem>

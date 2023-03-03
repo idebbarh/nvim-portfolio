@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ListOfProjects from "./ListOfProjects";
 import NormalParagraph from "./NormalParagraph";
 import SectionHeading from "./SectionHeading";
@@ -10,15 +10,21 @@ type ProjectInfoType = {
   description: string;
   techStack: string[];
 };
-
-function MyProjectsSection() {
+type MyProjectsSectionProps = {
+  setBufferContentHeight: () => void;
+};
+function MyProjectsSection({ setBufferContentHeight }: MyProjectsSectionProps) {
   const [selectedProject, setSelectedProject] =
     useState<null | ProjectInfoType>(null);
+
+  useEffect(() => {
+    setBufferContentHeight();
+  }, [selectedProject]);
 
   return (
     <div className="flex flex-col gap-4">
       <SectionHeading title="My Projects" tags={1} />
-      <NormalParagraph content="some projects I am the most proud of." />
+      <NormalParagraph content="Some projects I am the most proud of." />
       <ListOfProjects
         setSelectedProject={setSelectedProject}
         selectedProject={selectedProject}

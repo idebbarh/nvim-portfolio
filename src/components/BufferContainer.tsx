@@ -1,16 +1,33 @@
 import { useMemo, useState, useRef, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import AboutMeSection from "./AboutMeSection";
 import BufferContent from "./BufferContent";
+import MyProjectsSection from "./MyProjectsSection";
+import MySkillsSection from "./MySkillsSection";
+import ContactSection from "./ContactSection";
+import ColorScheme from "./ColorScheme";
+
 function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
   const [selectedLine, setSelectedLine] = useState<number | null>(null);
   const { pathname } = useLocation();
   const bufferContentRef = useRef<HTMLDivElement>(null);
+  const [bufferContentHeight, setBufferContentHeight] = useState<number>(0);
 
   const selectLine = (line: number) => {
     setSelectedLine(line);
   };
 
-  const lines = 100;
+  useEffect(() => {
+    setBufferContentHeight(bufferContentRef.current?.clientHeight || 0);
+    setSelectedLine(null);
+  }, [pathname]);
+
+  const lines = useMemo(() => {
+    return bufferContentRef.current
+      ? Math.ceil(bufferContentRef.current.clientHeight / 24)
+      : 1;
+  }, [bufferContentHeight]);
+
   const createLinesNumbers = (): JSX.Element[] => {
     return new Array(lines).fill(0).map((_, index) => {
       return (
@@ -47,7 +64,30 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
     >
       <div className="h-full flex overflow-scroll">
         <div className="flex flex-col items-end w-12">{numberLinesItems}</div>
-        <BufferContent ref={bufferContentRef} />
+        <BufferContent ref={bufferContentRef}>
+          <Routes>
+            <Route
+              path="/"
+              element={<Navigate to="about-me.md" replace={true} />}
+            />
+            <Route path="about-me.md" element={<AboutMeSection />} />
+            <Route
+              path="my-projects.md"
+              element={
+                <MyProjectsSection
+                  setBufferContentHeight={() =>
+                    setBufferContentHeight(
+                      bufferContentRef.current?.clientHeight || 0
+                    )
+                  }
+                />
+              }
+            />
+            <Route path="my-skills.md" element={<MySkillsSection />} />
+            <Route path="contact.md" element={<ContactSection />} />
+            <Route path="colorscheme.lua" element={<ColorScheme />} />
+          </Routes>
+        </BufferContent>
       </div>
 
       <div className="h-16 w-full absolute left-1/2 bottom-0 translate-x-[-50%] px-2">

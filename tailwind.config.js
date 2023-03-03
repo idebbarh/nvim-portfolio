@@ -19,6 +19,8 @@ module.exports = {
         "tn-orange-color": "#ff966c",
         "tn-green-color": "#5ae0a5",
         "tn-main-text-color": "#c8d3f5",
+        "tn-function-name-color": "#82aaff",
+        "tn-variable-name-color": "#c3e88d",
         //terminal colors
         "terminal-bg": "#12161b",
         "terminal-text-color": "#c0c5ce",
