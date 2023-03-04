@@ -43,11 +43,17 @@ function ListOfProjects({
               <h3 className="text-tn-main-text-color capitalize font-normal text-lg">
                 {name}
               </h3>
-              <button className="w-fit ml-auto bg-terminal-border-color text-tn-main-text-color capitalize text-lg font-bold px-12 rounded-md transition-colors duration-300 ease hover:bg-tn-orange-color">
-                <a href={link} target="_blank" rel="noreferrer">
+
+              <a
+                href={link}
+                target="_blank"
+                rel="noreferrer"
+                className="w-fit ml-auto"
+              >
+                <button className="bg-terminal-border-color text-tn-main-text-color capitalize text-lg font-bold px-12 rounded-md transition-colors duration-300 ease hover:bg-tn-orange-color">
                   view
-                </a>
-              </button>
+                </button>
+              </a>
               <div
                 className={`w-5 h-5 rounded-full border-2 border-solid border-terminal-border-color absolute top-2 right-2 ${
                   index === selectedProject?.id ? "bg-tn-green-color " : ""

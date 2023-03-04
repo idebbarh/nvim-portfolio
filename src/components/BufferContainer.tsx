@@ -92,7 +92,7 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
 
       <div className="h-16 w-full absolute left-1/2 bottom-0 translate-x-[-50%] px-2">
         <div className="bg-tn-file-explorer-bg p-2 flex justify-center">
-          <p className="text-tn-buffer-line-number-color font-bold">
+          <p className="text-tn-commant-color font-bold">
             portfolio/
             {pathname === "/neovim"
               ? "about me/about-me.md"

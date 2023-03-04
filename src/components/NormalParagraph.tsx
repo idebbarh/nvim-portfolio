@@ -53,6 +53,10 @@ function NormalParagraph({ content, replaceString }: NormalParagraphProps) {
       >
         {match}
       </span>
+    ) : context === "lua commant" ? (
+      <span key={match} className="text-tn-commant-color">
+        {match}
+      </span>
     ) : null;
   };
   return (
