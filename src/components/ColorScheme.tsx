@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { selectColorScheme } from "../redux/slices/colorSchemeSlice";
+import { useAppSelector } from "../redux/store/hooks";
 import ColorSchemeOption from "./ColorSchemeOption";
 import NormalParagraph from "./NormalParagraph";
 
 function ColorScheme() {
-  const [color, setColor] = useState("tokyonight");
+  const color = useAppSelector(selectColorScheme);
   return (
     <div className="flex flex-col gap-4">
       <NormalParagraph
@@ -21,12 +23,8 @@ function ColorScheme() {
             context: "lua commant",
           }}
         />
-        <ColorSchemeOption
-          title="tokyonight"
-          color={color}
-          setColor={setColor}
-        />
-        <ColorSchemeOption title="gruvbox" color={color} setColor={setColor} />
+        <ColorSchemeOption title="tokyonight" color={color} />
+        <ColorSchemeOption title="gruvbox" color={color} />
       </div>
     </div>
   );

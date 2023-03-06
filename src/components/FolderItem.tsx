@@ -4,6 +4,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { createRef, MouseEvent, useState } from "react";
+import useCurrentColorScheme from "../utils/useCurrentColorScheme";
 
 interface FolderItemPropsType {
   name: string;
@@ -12,6 +13,11 @@ interface FolderItemPropsType {
 }
 
 function FolderItem({ name, Icon, children }: FolderItemPropsType) {
+  const {
+    currentFileExplorerFolderNameColor,
+    currentFileExplorerFolderAngleIconColor,
+    currentFileExplorerItemsHoverColor,
+  } = useCurrentColorScheme();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleFolder = () => {
@@ -19,12 +25,14 @@ function FolderItem({ name, Icon, children }: FolderItemPropsType) {
   };
 
   return (
-    <div className="flex flex-col gap-2 cursor-pointer transition-colors duration-300 ease-in-out">
+    <div className="flex flex-col gap-2 cursor-pointer">
       <div
-        className="flex items-center gap-2 text-tn-file-explorer-folder-name-color hover:bg-tn-file-explorer-items-hover-color"
+        className={`flex items-center gap-2 ${currentFileExplorerFolderNameColor} ${currentFileExplorerItemsHoverColor}`}
         onClick={toggleFolder}
       >
-        <div className="text-tn-file-explorer-folder-angle-icon-color flex items-center text-2xl">
+        <div
+          className={`${currentFileExplorerFolderAngleIconColor} flex items-center text-2xl`}
+        >
           {isOpen ? (
             <KeyboardArrowDownIcon color="inherit" fontSize="inherit" />
           ) : (

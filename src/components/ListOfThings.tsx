@@ -1,4 +1,5 @@
 import socialMediaLinks from "../data/socials";
+import useCurrentColorScheme from "../utils/useCurrentColorScheme";
 import NormalParagraph from "./NormalParagraph";
 
 type ListOfThingsProps = {
@@ -7,12 +8,13 @@ type ListOfThingsProps = {
 };
 
 function ListOfThings({ things, isSocial }: ListOfThingsProps) {
+  const { currentOrangeColor } = useCurrentColorScheme();
   if (!things) return null;
   return (
     <ul className="flex flex-col gap-2">
       {things?.map((item, index) => (
         <li className="flex items-center gap-2" key={index}>
-          <span className="text-tn-orange-color">-</span>
+          <span className={`${currentOrangeColor}`}>-</span>
           <NormalParagraph
             content={item}
             replaceString={

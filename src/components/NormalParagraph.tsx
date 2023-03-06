@@ -1,4 +1,5 @@
 import reactStringReplace from "react-string-replace";
+import useCurrentColorScheme from "../utils/useCurrentColorScheme";
 
 type NormalParagraphProps = {
   content: string | null | undefined;
@@ -6,6 +7,14 @@ type NormalParagraphProps = {
 };
 
 function NormalParagraph({ content, replaceString }: NormalParagraphProps) {
+  const {
+    currentMainTextColor,
+    currentOrangeColor,
+    currentGreenColor,
+    currentFunctionNameColor,
+    currentVariableNameColor,
+    currentCommentColor,
+  } = useCurrentColorScheme();
   if (!content) return null;
   const replacer = (
     match: string,
@@ -31,36 +40,36 @@ function NormalParagraph({ content, replaceString }: NormalParagraphProps) {
         href={match}
         target="_blank"
         rel="noreferrer"
-        className="text-tn-orange-color"
+        className={`${currentOrangeColor} hover:underline`}
         key={match}
       >
         {match}
       </a>
     ) : context === "email" ? (
-      <a href={match} className="text-tn-orange-color" key={match}>
+      <a href={match} className={`${currentOrangeColor}`} key={match}>
         {match}
       </a>
     ) : context === "lua code" ? (
       <span
         className={`${
           match === "cmd"
-            ? "text-tn-green-color"
+            ? currentGreenColor
             : match === "colorscheme"
-            ? "text-tn-function-name-color"
-            : "text-tn-variable-name-color"
+            ? currentFunctionNameColor
+            : currentVariableNameColor
         }`}
         key={match}
       >
         {match}
       </span>
     ) : context === "lua commant" ? (
-      <span key={match} className="text-tn-commant-color">
+      <span key={match} className={`${currentCommentColor}`}>
         {match}
       </span>
     ) : null;
   };
   return (
-    <p className="text-tn-main-text-color text-lg font-medium">
+    <p className={`${currentMainTextColor} text-lg font-medium`}>
       {replaceString !== undefined
         ? replacerCaller(replaceString.str)
         : content}

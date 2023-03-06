@@ -2,12 +2,18 @@ import { useRef, useState, useMemo, Dispatch, SetStateAction } from "react";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useNavigate } from "react-router-dom";
 import TerminalHelp from "../components/TerminalHelp";
+import useCurrentColorScheme from "../utils/useCurrentColorScheme";
 
 interface TerminalProps {
   setIsNeovimOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 function Terminal({ setIsNeovimOpen }: TerminalProps) {
+  const {
+    currentTerminalBg,
+    currentTerminalTextColor,
+    currentTerminalBorderColor,
+  } = useCurrentColorScheme();
   const [inputValue, setInputValue] = useState("");
   const [prevInputValues, setPrevInputValues] = useState<string[]>([]);
   const [typingLine, setTypingLine] = useState(1);
@@ -77,14 +83,16 @@ function Terminal({ setIsNeovimOpen }: TerminalProps) {
 
   return (
     <div
-      className="relative bg-terminal-bg h-screen w-screen text-terminal-text-color p-12 text-lg font-normal"
+      className={`relative ${currentTerminalBg} h-screen w-screen ${currentTerminalTextColor} p-12 text-lg font-normal`}
       onClick={() => {
         if (inputRef.current) {
           inputRef.current.focus();
         }
       }}
     >
-      <div className="border-2 h-full border-solid border-terminal-border-color rounded-lg p-8 shadow-2xl">
+      <div
+        className={`border-2 h-full border-solid ${currentTerminalBorderColor} rounded-lg p-8 shadow-2xl`}
+      >
         <form onSubmit={submitHandler}>{lines}</form>
       </div>
       <TerminalHelp />
