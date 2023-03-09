@@ -2,30 +2,9 @@ import { selectColorScheme } from "../redux/slices/colorSchemeSlice";
 import { useAppSelector } from "../redux/store/hooks";
 
 type ClassesType = {
-  [key: ReturnType<typeof selectColorScheme>]: {
+  [key: string]: {
     [key: string]: string;
   };
-};
-const colors = {
-  //gruvbox colors
-  "gv-file-explorer-bg": "#282828",
-  "gv-file-explorer-folder-name-color": "#fb4934",
-  "gv-file-explorer-file-name-color": "#ebdbb2",
-  "gv-file-explorer-folder-angle-icon-color": "#ebdbb2",
-  "gv-file-explorer-items-hover-color": "#3c3836",
-  "gv-buffer-background-color": "#282828",
-  "gv-buffer-line-number-color": "#ebdbb2",
-  "gv-section-heading-color": "#fb4934",
-  "gv-orange-color": "#fe8019",
-  "gv-green-color": "#b8bb26",
-  "gv-main-text-color": "#ebdbb2",
-  "gv-function-name-color": "#fb4934",
-  "gv-variable-name-color": "#fabd2f",
-  "gv-commant-color": "#928374",
-  //terminal colors
-  "terminal-bg": "#12161b",
-  "terminal-text-color": "#c0c5ce",
-  "terminal-border-color": "#684eff",
 };
 const classes: ClassesType = {
   tokyonight: {
@@ -39,6 +18,8 @@ const classes: ClassesType = {
     bufferLineNumberColor: "text-tn-buffer-line-number-color",
     sectionHeadingColor: "text-tn-section-heading-color",
     orangeColor: "text-tn-orange-color",
+    currentGroupHoverOrangeColor: "group-hover:text-tn-orange-color",
+    currentHoverOrangeColor: "hover:text-tn-orange-color",
     greenColor: "text-tn-green-color",
     mainTextColor: "text-tn-main-text-color",
     functionNameColor: "text-tn-function-name-color",
@@ -59,6 +40,8 @@ const classes: ClassesType = {
     bufferLineNumberColor: "text-gv-buffer-line-number-color",
     sectionHeadingColor: "text-gv-section-heading-color",
     orangeColor: "text-gv-orange-color",
+    currentGroupHoverOrangeColor: "group-hover:text-gv-orange-color",
+    currentHoverOrangeColor: "hover:text-gv-orange-color",
     greenColor: "text-gv-green-color",
     mainTextColor: "text-gv-main-text-color",
     functionNameColor: "text-gv-function-name-color",
@@ -79,6 +62,8 @@ type CurrentColorSchemeType = {
   currentBufferLineNumberColor: string;
   currentSectionHeadingColor: string;
   currentOrangeColor: string;
+  currentGroupHoverOrangeColor: string;
+  currentHoverOrangeColor: string;
   currentGreenColor: string;
   currentMainTextColor: string;
   currentFunctionNameColor: string;
@@ -103,6 +88,8 @@ function useCurrentColorScheme(): CurrentColorSchemeType {
     currentBufferLineNumberColor: classes[color].bufferLineNumberColor,
     currentSectionHeadingColor: classes[color].sectionHeadingColor,
     currentOrangeColor: classes[color].orangeColor,
+    currentGroupHoverOrangeColor: classes[color].currentGroupHoverOrangeColor,
+    currentHoverOrangeColor: classes[color].currentHoverOrangeColor,
     currentGreenColor: classes[color].greenColor,
     currentMainTextColor: classes[color].mainTextColor,
     currentFunctionNameColor: classes[color].functionNameColor,

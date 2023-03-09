@@ -7,21 +7,30 @@ import MySkillsSection from "./MySkillsSection";
 import ContactSection from "./ContactSection";
 import ColorScheme from "./ColorScheme";
 import useCurrentColorScheme from "../utils/useCurrentColorScheme";
-import { useAppSelector } from "../redux/store/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
 import { selectColorScheme } from "../redux/slices/colorSchemeSlice";
+import {
+  selectIsFileExplorerOpen,
+  toggleFileExplorer,
+} from "../redux/slices/fileExplorerSlice";
 
 function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
   const color = useAppSelector(selectColorScheme);
+  const dispatch = useAppDispatch();
   const {
     currentBufferBg,
     currentBufferLineNumberColor,
     currentFileExplorerBg,
     currentCommentColor,
+    currentMainTextColor,
+    currentHoverOrangeColor,
   } = useCurrentColorScheme();
   const [selectedLine, setSelectedLine] = useState<number | null>(null);
   const { pathname } = useLocation();
   const bufferContentRef = useRef<HTMLDivElement>(null);
   const [bufferContentHeight, setBufferContentHeight] = useState<number>(0);
+
+  const isFileExplorerOpen = useAppSelector(selectIsFileExplorerOpen);
 
   const selectLine = (line: number) => {
     setSelectedLine(line);
@@ -29,6 +38,9 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
 
   useEffect(() => {
     setBufferContentHeight(bufferContentRef.current?.clientHeight || 0);
+  }, [pathname, isFileExplorerOpen]);
+
+  useEffect(() => {
     setSelectedLine(null);
   }, [pathname]);
 
@@ -43,7 +55,7 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
       return (
         <span
           key={index}
-          className={`${currentBufferLineNumberColor} font-semibold cursor-pointer${
+          className={`relative ${currentBufferLineNumberColor} font-semibold cursor-pointer${
             selectedLine === index + 1 ? " pr-4" : ""
           }`}
           onClick={() => selectLine(index + 1)}
@@ -70,7 +82,7 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
   return (
     <div
       id="bufferContainer"
-      className={`relative h-full flex-[0.8] ${currentBufferBg} px-4 pt-4 pb-16`}
+      className={`relative h-full flex-1 ${currentBufferBg} px-4 pt-4 pb-16`}
     >
       <div className="h-full flex overflow-scroll">
         <div className="flex flex-col items-end w-12">{numberLinesItems}</div>
@@ -100,7 +112,7 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
         </BufferContent>
       </div>
 
-      <div className="h-16 w-full absolute left-1/2 bottom-0 translate-x-[-50%] px-2">
+      <div className="h-16 w-full absolute left-1/2 bottom-8 translate-x-[-50%] px-2">
         <div className={`${currentFileExplorerBg} p-2 flex justify-center`}>
           <p className={`${currentCommentColor} font-bold`}>
             portfolio/
@@ -118,6 +130,12 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
                   .concat(`/${pathname.split("/").slice(2).join("")}`)}
           </p>
         </div>
+        <button
+          className={`pt-4 ${currentMainTextColor} font-medium text-[1.1rem] transition-colors duration-300 ease-linear ${currentHoverOrangeColor}`}
+          onClick={() => dispatch(toggleFileExplorer())}
+        >
+          :NvimTreeToggle
+        </button>
       </div>
     </div>
   );

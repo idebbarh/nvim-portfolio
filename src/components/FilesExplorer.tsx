@@ -2,6 +2,8 @@ import FolderItem from "./FolderItem";
 import FolderIcon from "@mui/icons-material/Folder";
 import FileItem from "./FileItem";
 import useCurrentColorScheme from "../utils/useCurrentColorScheme";
+import { useAppSelector } from "../redux/store/hooks";
+import { selectIsFileExplorerOpen } from "../redux/slices/fileExplorerSlice";
 
 const luaIcon: string = require("../assets/images/lua-icon.png");
 const markdownIcon: string =
@@ -9,10 +11,15 @@ const markdownIcon: string =
 
 function FilesExplorer({ openBuffer }: { openBuffer: boolean }) {
   const { currentFileExplorerBg } = useCurrentColorScheme();
+  const isFileExplorerOpen = useAppSelector(selectIsFileExplorerOpen);
   return (
     <div
       className={`h-full p-4 ${currentFileExplorerBg} flex flex-col gap-2 ${
-        openBuffer ? "flex-[0.2]" : "flex-1"
+        openBuffer ? "w-[350px]" : "w-full"
+      } ${
+        isFileExplorerOpen
+          ? "relative translate-x-0"
+          : "absolute -translate-x-full"
       }`}
     >
       <FolderItem name="about me" Icon={FolderIcon}>

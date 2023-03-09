@@ -27,7 +27,7 @@ module.exports = {
         "tn-terminal-text-color": "#c0c5ce",
         "tn-terminal-border-color": "#684eff",
         //gruvbox colors
-        "gv-file-explorer-bg": "#282828",
+        "gv-file-explorer-bg": "#1d2021",
         "gv-file-explorer-folder-name-color": "#fb4934",
         "gv-file-explorer-file-name-color": "#ebdbb2",
         "gv-file-explorer-folder-angle-icon-color": "#ebdbb2",

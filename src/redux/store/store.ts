@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import colorSchemeSlice from "../slices/colorSchemeSlice";
+import fileExplorerSlice from "../slices/fileExplorerSlice";
+
 const store = configureStore({
   reducer: {
     colorScheme: colorSchemeSlice.reducer,
+    fileExplorer: fileExplorerSlice.reducer,
   },
 });
 

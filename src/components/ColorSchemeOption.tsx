@@ -8,7 +8,11 @@ type ColorSchemeOptionPropsType = {
 };
 
 function ColorSchemeOption({ title, color }: ColorSchemeOptionPropsType) {
-  const { currentCommentColor, currentOrangeColor } = useCurrentColorScheme();
+  const {
+    currentCommentColor,
+    currentOrangeColor,
+    currentGroupHoverOrangeColor,
+  } = useCurrentColorScheme();
   const dispatch = useAppDispatch();
   return (
     <div
@@ -17,10 +21,10 @@ function ColorSchemeOption({ title, color }: ColorSchemeOptionPropsType) {
     >
       <span>-- </span>
       <span
-        className={`w-7 flex justify-between items-center transition duration-300 ease-in-out ${`group-hover:${currentOrangeColor}`}`}
+        className={`w-7 flex justify-between items-center transition duration-300 ease-in-out ${currentGroupHoverOrangeColor}`}
       >
         [
-        <span className={`font-normal px-1 !${currentCommentColor}`}>
+        <span className={`font-normal px-1 ${currentCommentColor}`}>
           {color === title ? "x" : ""}
         </span>
         ]
