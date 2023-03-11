@@ -3,7 +3,7 @@ import { OverridableComponent } from "@mui/material/OverridableComponent";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-import { createRef, MouseEvent, useState } from "react";
+import { useState } from "react";
 import useCurrentColorScheme from "../utils/useCurrentColorScheme";
 
 interface FolderItemPropsType {

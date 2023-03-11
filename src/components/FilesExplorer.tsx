@@ -2,27 +2,23 @@ import FolderItem from "./FolderItem";
 import FolderIcon from "@mui/icons-material/Folder";
 import FileItem from "./FileItem";
 import useCurrentColorScheme from "../utils/useCurrentColorScheme";
-import { useAppSelector } from "../redux/store/hooks";
-import { selectIsFileExplorerOpen } from "../redux/slices/fileExplorerSlice";
-import { useMediaQuery } from "@mui/material";
+import useFileExplorer from "../utils/useFileExplorer";
+import useBuffer from "../utils/useBuffer";
 
 const luaIcon: string = require("../assets/images/lua-icon.png");
 const markdownIcon: string =
   "https://d33wubrfki0l68.cloudfront.net/f1f475a6fda1c2c4be4cac04033db5c3293032b4/513a4/assets/images/markdown-mark-white.svg";
 
-function FilesExplorer({ openBuffer }: { openBuffer: boolean }) {
+function FilesExplorer() {
   const { currentFileExplorerBg } = useCurrentColorScheme();
-  const isFileExplorerOpen = useAppSelector(selectIsFileExplorerOpen);
-  const match = useMediaQuery("(min-width:1024px)");
-
+  const isFileExplorerOpen = useFileExplorer();
+  const isBufferOpen = useBuffer();
   return (
     <div
-      className={`z-50 h-full p-4 left-0 top-0 ${currentFileExplorerBg} flex flex-col gap-2 ${
-        openBuffer ? "w-[350px]" : "w-full"
-      } ${
+      className={`z-50 h-full p-4 left-0 top-0 ${currentFileExplorerBg} flex-col gap-2 ${
         isFileExplorerOpen
-          ? `${match ? "relative" : "absolute"} translate-x-0`
-          : "absolute -translate-x-full"
+          ? `${isBufferOpen ? "w-[350px]" : "w-full"} flex`
+          : "hidden"
       }`}
     >
       <FolderItem name="about me" Icon={FolderIcon}>

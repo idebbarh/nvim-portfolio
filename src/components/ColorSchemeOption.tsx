@@ -8,11 +8,8 @@ type ColorSchemeOptionPropsType = {
 };
 
 function ColorSchemeOption({ title, color }: ColorSchemeOptionPropsType) {
-  const {
-    currentCommentColor,
-    currentOrangeColor,
-    currentGroupHoverOrangeColor,
-  } = useCurrentColorScheme();
+  const { currentCommentColor, currentGroupHoverOrangeColor } =
+    useCurrentColorScheme();
   const dispatch = useAppDispatch();
   return (
     <div

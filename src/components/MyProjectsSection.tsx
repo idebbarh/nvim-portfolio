@@ -3,7 +3,6 @@ import ListOfProjects from "./ListOfProjects";
 import NormalParagraph from "./NormalParagraph";
 import SectionHeading from "./SectionHeading";
 import ListOfThings from "./ListOfThings";
-import useCurrentColorScheme from "../utils/useCurrentColorScheme";
 
 type ProjectInfoType = {
   id: number;
@@ -20,7 +19,7 @@ function MyProjectsSection({ setBufferContentHeight }: MyProjectsSectionProps) {
 
   useEffect(() => {
     setBufferContentHeight();
-  }, [selectedProject]);
+  }, [selectedProject, setBufferContentHeight]);
 
   return (
     <div className="flex flex-col gap-4">

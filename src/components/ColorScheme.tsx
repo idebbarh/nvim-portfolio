@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { selectColorScheme } from "../redux/slices/colorSchemeSlice";
 import { useAppSelector } from "../redux/store/hooks";
 import ColorSchemeOption from "./ColorSchemeOption";

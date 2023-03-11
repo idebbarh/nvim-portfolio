@@ -79,7 +79,10 @@ function Terminal({ setIsNeovimOpen }: TerminalProps) {
       );
     });
   };
-  const lines = useMemo(() => generateLines(), [typingLine, inputValue]);
+  const lines = useMemo(
+    () => generateLines(),
+    [typingLine, inputValue, generateLines]
+  );
 
   return (
     <div

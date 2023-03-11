@@ -1,5 +1,11 @@
 import { useMemo, useState, useRef, useEffect } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import AboutMeSection from "./AboutMeSection";
 import BufferContent from "./BufferContent";
 import MyProjectsSection from "./MyProjectsSection";
@@ -13,10 +19,15 @@ import {
   selectIsFileExplorerOpen,
   toggleFileExplorer,
 } from "../redux/slices/fileExplorerSlice";
+import useBuffer from "../utils/useBuffer";
+import { useMediaQuery } from "@mui/material";
 
-function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
+function BufferContainer() {
+  const match = useMediaQuery("(min-width:1024px)");
+  const isBufferOepn = useBuffer();
   const color = useAppSelector(selectColorScheme);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {
     currentBufferBg,
     currentBufferLineNumberColor,
@@ -45,9 +56,7 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
   }, [pathname]);
 
   const lines = useMemo(() => {
-    return bufferContentRef.current
-      ? Math.ceil(bufferContentRef.current.clientHeight / 24)
-      : 1;
+    return bufferContentHeight ? Math.ceil(bufferContentHeight / 24) : 1;
   }, [bufferContentHeight]);
 
   const createLinesNumbers = (): JSX.Element[] => {
@@ -72,10 +81,10 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
 
   const numberLinesItems = useMemo<JSX.Element[]>(
     () => createLinesNumbers(),
-    [lines, selectedLine, color]
+    [lines, selectedLine, color, createLinesNumbers]
   );
 
-  if (!openBuffer) {
+  if (!isBufferOepn) {
     return null;
   }
 
@@ -132,9 +141,13 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
         </div>
         <button
           className={`pt-4 ${currentMainTextColor} font-medium text-[1.1rem] transition-colors duration-300 ease-linear ${currentHoverOrangeColor}`}
-          onClick={() => dispatch(toggleFileExplorer())}
+          onClick={
+            match
+              ? () => dispatch(toggleFileExplorer())
+              : () => navigate("/neovim")
+          }
         >
-          :NvimTreeToggle
+          {match ? ":NvimTreeToggle" : ":Ex"}
         </button>
       </div>
     </div>
