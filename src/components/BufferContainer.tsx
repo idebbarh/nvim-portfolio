@@ -82,7 +82,7 @@ function BufferContainer({ openBuffer }: { openBuffer: boolean }) {
   return (
     <div
       id="bufferContainer"
-      className={`relative h-full flex-1 ${currentBufferBg} px-4 pt-4 pb-16`}
+      className={`relative h-full flex-1 ${currentBufferBg} px-4 pt-4 pb-[6.2rem]`}
     >
       <div className="h-full flex overflow-scroll">
         <div className="flex flex-col items-end w-12">{numberLinesItems}</div>

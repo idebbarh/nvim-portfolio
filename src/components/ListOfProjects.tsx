@@ -65,10 +65,10 @@ function ListOfProjects({
                     color === "tokyonight"
                       ? "bg-tn-terminal-border-color"
                       : "bg-gv-terminal-border-color"
-                  } ${currentMainTextColor} capitalize text-lg font-bold px-12 rounded-md transition-colors duration-300 ease hover:${
+                  } ${currentMainTextColor} capitalize text-lg font-bold px-12 rounded-md transition-colors duration-300 ease ${
                     color === "tokyonight"
-                      ? "bg-tn-orange-color"
-                      : "bg-gv-orange-color"
+                      ? "hover:bg-tn-orange-color"
+                      : "hover:bg-gv-orange-color"
                   }`}
                 >
                   view

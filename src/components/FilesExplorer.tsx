@@ -4,6 +4,7 @@ import FileItem from "./FileItem";
 import useCurrentColorScheme from "../utils/useCurrentColorScheme";
 import { useAppSelector } from "../redux/store/hooks";
 import { selectIsFileExplorerOpen } from "../redux/slices/fileExplorerSlice";
+import { useMediaQuery } from "@mui/material";
 
 const luaIcon: string = require("../assets/images/lua-icon.png");
 const markdownIcon: string =
@@ -12,13 +13,15 @@ const markdownIcon: string =
 function FilesExplorer({ openBuffer }: { openBuffer: boolean }) {
   const { currentFileExplorerBg } = useCurrentColorScheme();
   const isFileExplorerOpen = useAppSelector(selectIsFileExplorerOpen);
+  const match = useMediaQuery("(min-width:1024px)");
+
   return (
     <div
-      className={`h-full p-4 ${currentFileExplorerBg} flex flex-col gap-2 ${
+      className={`z-50 h-full p-4 left-0 top-0 ${currentFileExplorerBg} flex flex-col gap-2 ${
         openBuffer ? "w-[350px]" : "w-full"
       } ${
         isFileExplorerOpen
-          ? "relative translate-x-0"
+          ? `${match ? "relative" : "absolute"} translate-x-0`
           : "absolute -translate-x-full"
       }`}
     >
